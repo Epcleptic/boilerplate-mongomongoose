@@ -22,12 +22,16 @@ const personSchema = new mongoose.Schema({
 
 let Person = mongoose.model("Person", personSchema);
 
+const handleData = (done, err, data) => {
+  if (err) return console.error(err);
+  done(null, data);
+};
+
 const savePerson = (data, done) => {
   let person = new Person(data);
 
   person.save(function (err, data) {
-    if (err) return console.error(err);
-    done(null, data);
+    handleData(done, err, data);
   });
 };
 
@@ -49,7 +53,9 @@ const createManyPeople = (arrayOfPeople, done) => {
 };
 
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find({ name: personName }, function (err, data) {
+    handleData(done, err, data);
+  });
 };
 
 const findOneByFood = (food, done) => {
