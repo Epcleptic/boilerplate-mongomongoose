@@ -72,8 +72,17 @@ const findPersonById = (personId, done) => {
   findBy({ _id: personId }, done);
 };
 
+// Old way of doing find-update
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
+
+  Person.findOne({ _id: personId }, function (err, person) {
+    if (err) return console.error(err);
+    person.favoriteFoods += [foodToAdd];
+    person.save(function (err, data) {
+      handleData(done, err, data);
+    });
+  });
 
   done(null /*, data*/);
 };
