@@ -58,14 +58,18 @@ const findPeopleByName = (personName, done) => {
   });
 };
 
-const findOneByFood = (food, done) => {
-  Person.findOne({ favoriteFoods: food }, function (err, data) {
+const findBy = (query, done) => {
+  Person.findOne(query, function (err, data) {
     handleData(done, err, data);
   });
 };
 
+const findOneByFood = (food, done) => {
+  findBy({ favoriteFoods: food }, done);
+};
+
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  findBy({ _id: personId }, done);
 };
 
 const findEditThenSave = (personId, done) => {
