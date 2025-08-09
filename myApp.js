@@ -135,7 +135,7 @@ const queryChain = (done) => {
   Person.find({ food: foodToSearch })
     .sort({ name: 1 })
     .limit(2)
-    .select({ age: false })
+    .select({ age: 0 })
     .exec((err, data) => {
       handleData(done, err, data);
     });
