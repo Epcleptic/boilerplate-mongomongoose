@@ -43,7 +43,7 @@ const createAndSavePerson = (done) => {
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  arrayOfPeople.each((person) => {
+  arrayOfPeople.forEach((person) => {
     savePerson(person, done);
   });
 };
